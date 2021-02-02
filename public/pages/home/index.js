@@ -7,7 +7,7 @@ window.onload = () => {
                 return;
             }
 
-            window.open('/pages/room/?room=' + room);
+            window.open(`/pages/room/?room=${room}`);
 
         })
     }

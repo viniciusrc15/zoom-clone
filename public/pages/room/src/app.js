@@ -19,11 +19,22 @@ const onload = () => {
   const view = new View()
   const media = new Media()
 
+  const peerConfig = Object.values({
+    id: undefined,
+    config: {
+      port: 9000,
+      host: 'localhost',
+      path: '/'
+    }
+  })
+  const peerBuilder = new PeerBuilder({ peerConfig })
+
   const deps = {
     room,
     media,
     view,
-    socketBuilder
+    socketBuilder,
+    peerBuilder
   }
   // view.renderVideo({ userId: 'teste01', url: 'https://media.giphy.c om/media/PaC5cuf49rRyw8XpiA/giphy.mp4', isCurrentId: true })
   // view.renderVideo({ userId: 'teste01', url: 'https://media.giphy.com/media/PaC5cuf49rRyw8XpiA/giphy.mp4' })
