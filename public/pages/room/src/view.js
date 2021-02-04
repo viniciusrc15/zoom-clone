@@ -1,6 +1,6 @@
 class View {
     constructor() {
-
+        this.recorderBtn = document.getElementById("record")
     }
 
     createVideoElement({ muted = true, src, srcObject }) {
@@ -15,7 +15,7 @@ class View {
             Util.sleep(200).then(_ => video.play())
         }
 
-        if(srcObject) {
+        if (srcObject) {
             video.addEventListener("loadedmetadata", _ => video.play())
         }
 
@@ -39,6 +39,31 @@ class View {
 
         const videoGrid = document.getElementById('video-grid')
         videoGrid.append(div)
+    }
+
+    removeVideoElement(userId) {
+        divVideoUser = document.getElementById(userId)
+        if (divVideoUser) {
+            divVideoUser.remove()
+        }
+    }
+
+    toggleRecordingButtonColor(isActive = true) {
+        this.recorderBtn.style.color = isActive ? 'red' : 'white'
+    }
+
+    onRecordClick(command) {
+        this.recordingEnable = false
+        return () => {
+            const isActive = this.recordingEnable = !this.recordingEnable
+            
+            command(this.recordingEnable)
+            this.toggleRecordingButtonColor(isActive)
+        }
+    }
+
+    configureRecordButton(command) {
+        this.recorderBtn.addEventListener('click', this.onRecordClick(command))
     }
 
     setParticipants(count) {
