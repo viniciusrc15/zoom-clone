@@ -1,6 +1,7 @@
 class View {
     constructor() {
         this.recorderBtn = document.getElementById("record")
+        this.leaveBtn =  document.getElementById("leave")
     }
 
     createVideoElement({ muted = true, src, srcObject }) {
@@ -62,8 +63,21 @@ class View {
         }
     }
 
+    onLeaveClick(command) {
+        return async() => {
+            command()
+
+            await Util.sleep(400)
+            window.location = '/pages/home'
+        }
+    }
+
     configureRecordButton(command) {
         this.recorderBtn.addEventListener('click', this.onRecordClick(command))
+    }
+
+    configureLeaveButton(command) {
+        this.leaveBtn.addEventListener('click', this.onLeaveClick(command))
     }
 
     setParticipants(count) {
